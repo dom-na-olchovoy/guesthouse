@@ -535,19 +535,33 @@
                 max-width: 100%;
             }
 
+            /* ИСПРАВЛЕНИЕ: принудительно одинаковая ширина для всех полей */
             #bookingForm input[type="date"],
             #bookingForm input[type="number"],
             #bookingForm select {
-                width: 100%;
-                max-width: 100%;
-                box-sizing: border-box;
-                padding: 0.5rem 0.75rem;
-                font-size: 14px;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+                padding: 0.75rem !important;
+                font-size: 14px !important;
+                border: 2px solid #e5e7eb !important;
+                border-radius: 0.5rem !important;
+                background-color: white !important;
+                appearance: none !important;
+                -webkit-appearance: none !important;
+                -moz-appearance: none !important;
+                display: block !important;
+            }
+
+            /* Специально для iOS Safari - убираем внутренние тени и стили */
+            #bookingForm input[type="date"]::-webkit-calendar-picker-indicator {
+                opacity: 0.5;
             }
 
             #bookingForm label {
                 font-size: 13px;
                 margin-bottom: 0.25rem;
+                display: block;
             }
 
             .bg-gray-100 {
@@ -572,8 +586,8 @@
             #bookingForm input[type="date"],
             #bookingForm input[type="number"],
             #bookingForm select {
-                font-size: 13px;
-                padding: 0.5rem;
+                font-size: 13px !important;
+                padding: 0.6rem !important;
             }
             
             .bg-gray-100 {
@@ -1134,6 +1148,14 @@
         checkout.addEventListener('change', calculatePrice);
         document.getElementById('pets').addEventListener('change', calculatePrice);
 
+        // ФУНКЦИЯ ФОРМАТИРОВАНИЯ ДАТЫ: "2026-11-05" → "05.11.2026"
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const parts = dateString.split('-');
+            // parts[0] = год, parts[1] = месяц, parts[2] = день
+            return `${parts[2]}.${parts[1]}.${parts[0]}`;
+        }
+
         // ОТПРАВКА В WHATSAPP
         function sendToWhatsApp() {
             const inDate = checkin.value;
@@ -1147,7 +1169,11 @@
             }
 
             const phone = '79529795406'; 
-            const message = `Здравствуйте! Хочу забронировать гостевой дом на Ольховой.%0A📅 Заезд: ${inDate}%0A📅 Выезд: ${outDate}%0A👥 Гостей: ${guests}%0A💰 Итого: ${total} ₽.%0AПодтвердите, пожалуйста, наличие мест.`;
+            // Форматируем даты в формат ДД.ММ.ГГГГ
+            const formattedCheckin = formatDate(inDate);
+            const formattedCheckout = formatDate(outDate);
+            
+            const message = `Здравствуйте! Хочу забронировать гостевой дом на Ольховой.%0A📅 Заезд: ${formattedCheckin}%0A📅 Выезд: ${formattedCheckout}%0A👥 Гостей: ${guests}%0A💰 Итого: ${total} ₽.%0AПодтвердите, пожалуйста, наличие мест.`;
             
             window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
         }
@@ -1165,7 +1191,11 @@
             }
 
             const phone = '79529795406'; 
-            const message = `Здравствуйте! Хочу забронировать гостевой дом на Ольховой.%0A📅 Заезд: ${inDate}%0A📅 Выезд: ${outDate}%0A👥 Гостей: ${guests}%0A💰 Итого: ${total} ₽.%0AПодтвердите, пожалуйста, наличие мест.`;
+            // Форматируем даты в формат ДД.ММ.ГГГГ
+            const formattedCheckin = formatDate(inDate);
+            const formattedCheckout = formatDate(outDate);
+            
+            const message = `Здравствуйте! Хочу забронировать гостевой дом на Ольховой.%0A📅 Заезд: ${formattedCheckin}%0A📅 Выезд: ${formattedCheckout}%0A👥 Гостей: ${guests}%0A💰 Итого: ${total} ₽.%0AПодтвердите, пожалуйста, наличие мест.`;
             
             const encodedMessage = encodeURIComponent(message);
             window.location.href = `max://chat/${phone}?text=${encodedMessage}`;
