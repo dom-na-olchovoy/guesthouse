@@ -70,11 +70,6 @@
             background-clip: text;
         }
 
-        /* Редактирование */
-        .editable { border: 2px dashed transparent; transition: all 0.3s; }
-        .editing .editable { border: 2px dashed #3b82f6; background: rgba(59, 130, 246, 0.05); cursor: text; }
-        .editing .editable:hover { background: rgba(59, 130, 246, 0.1); }
-
         /* ГЛАВНЫЙ ЭКРАН С СЛАЙД-ШОУ */
         .hero-section {
             position: relative;
@@ -257,7 +252,7 @@
             white-space: nowrap;
         }
 
-        /* МОДАЛЬНОЕ ОКНО ГАЛЕРЕИ - исправлено для мобильных */
+        /* МОДАЛЬНОЕ ОКНО ГАЛЕРЕИ */
         .modal {
             display: none;
             position: fixed;
@@ -512,11 +507,11 @@
             box-shadow: 0 10px 25px rgba(0, 136, 204, 0.3);
         }
 
-        /* Адаптация для мобильных - исправлены поля ввода */
+        /* ИСПРАВЛЕНИЕ ДЛЯ МОБИЛЬНЫХ - поля ввода */
         @media (max-width: 768px) {
             .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
             }
             
             .photo-stack {
@@ -525,28 +520,64 @@
             }
             
             .grid {
-                gap: 1rem;
-            }
-
-            /* Исправление полей ввода дат */
-            input[type="date"],
-            input[type="number"],
-            select {
-                max-width: 100%;
-                box-sizing: border-box;
+                gap: 0.75rem;
             }
 
             #bookingForm {
                 width: 100%;
                 max-width: 100%;
+                padding: 0 0.5rem;
+                box-sizing: border-box;
             }
 
             #bookingForm > div {
                 width: 100%;
+                max-width: 100%;
+            }
+
+            #bookingForm input[type="date"],
+            #bookingForm input[type="number"],
+            #bookingForm select {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                padding: 0.5rem 0.75rem;
+                font-size: 14px;
+            }
+
+            #bookingForm label {
+                font-size: 13px;
+                margin-bottom: 0.25rem;
             }
 
             .bg-gray-100 {
                 overflow-x: hidden;
+                padding: 1rem !important;
+            }
+
+            #pricePerNight, #totalPrice {
+                font-size: 1.5rem !important;
+            }
+
+            #bookingForm button,
+            #bookingForm a {
+                padding: 0.75rem 0.5rem !important;
+                font-size: 14px !important;
+                word-wrap: break-word;
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 375px) {
+            #bookingForm input[type="date"],
+            #bookingForm input[type="number"],
+            #bookingForm select {
+                font-size: 13px;
+                padding: 0.5rem;
+            }
+            
+            .bg-gray-100 {
+                padding: 0.75rem !important;
             }
         }
     </style>
@@ -556,7 +587,7 @@
     <!-- Навигация -->
     <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold gradient-text editable" data-id="nav-logo">🏡 Дом на Ольховой</div>
+            <div class="text-2xl font-bold gradient-text">🏡 Дом на Ольховой</div>
             <div class="hidden md:flex space-x-8">
                 <a href="#about" class="hover:text-green-600 transition font-medium">О доме</a>
                 <a href="#gallery" class="hover:text-green-600 transition font-medium">Фото</a>
@@ -575,8 +606,8 @@
                 <div class="inline-block bg-yellow-400 text-gray-900 px-4 py-1 rounded-full font-bold mb-4 text-sm animate-float">
                     🏆 Официальный значок «Хорошее место 2026» от Яндекса
                 </div>
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 editable" data-id="hero-title">Уютный гостевой дом в 1 км от термальных источников «Псыгупс»</h1>
-                <p class="text-xl mb-8 editable" data-id="hero-subtitle">Идеальное место для семейного отдыха: тишина, комфорт и всё необходимое для вашего расслабления.</p>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Уютный гостевой дом в 1 км от термальных источников «Псыгупс»</h1>
+                <p class="text-xl mb-8">Идеальное место для семейного отдыха: тишина, комфорт и всё необходимое для вашего расслабления.</p>
                 <a href="#booking" class="btn-primary inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-lg transition shadow-lg">
                     Проверить свободные даты
                 </a>
@@ -587,15 +618,15 @@
 
     <!-- О доме -->
     <section id="about" class="py-20 container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12 editable scroll-reveal" data-id="about-title">Всё для вашего комфорта</h2>
+        <h2 class="text-3xl font-bold text-center mb-12 scroll-reveal">Всё для вашего комфорта</h2>
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="scroll-reveal">
                 <ul class="space-y-4 text-lg">
-                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-home text-green-600 w-8"></i> <span class="editable" data-id="feat-1">Площадь дома 60 м² на участке 7 соток</span></li>
-                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-bed text-green-600 w-8"></i> <span class="editable" data-id="feat-2">2 изолированные комнаты, до 6 спальных мест</span></li>
-                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-snowflake text-green-600 w-8"></i> <span class="editable" data-id="feat-3">Кондиционер, Wi-Fi, ТВ, стиральная машина</span></li>
-                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-utensils text-green-600 w-8"></i> <span class="editable" data-id="feat-4">Полностью оборудованная кухня и мангальная зона</span></li>
-                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-paw text-green-600 w-8"></i> <span class="editable" data-id="feat-5">Можно с домашними питомцами (доплата 500 ₽)</span></li>
+                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-home text-green-600 w-8"></i> <span>Площадь дома 60 м² на участке 7 соток</span></li>
+                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-bed text-green-600 w-8"></i> <span>2 изолированные комнаты, до 6 спальных мест</span></li>
+                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-snowflake text-green-600 w-8"></i> <span>Кондиционер, Wi-Fi, ТВ, стиральная машина</span></li>
+                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-utensils text-green-600 w-8"></i> <span>Полностью оборудованная кухня и мангальная зона</span></li>
+                    <li class="flex items-center hover-lift p-3 rounded-lg"><i class="fas fa-paw text-green-600 w-8"></i> <span>Можно с домашними питомцами (доплата 500 ₽)</span></li>
                 </ul>
             </div>
             <div class="scroll-reveal">
@@ -614,7 +645,7 @@
     <!-- ГАЛЕРЕЯ ФОТОГРАФИЙ -->
     <section id="gallery" class="py-20 bg-gradient-to-br from-gray-50 to-green-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-4 editable scroll-reveal" data-id="gallery-title">Фотографии дома</h2>
+            <h2 class="text-3xl font-bold text-center mb-4 scroll-reveal">Фотографии дома</h2>
             <p class="text-center text-gray-600 mb-12 scroll-reveal">Наведите на категорию, чтобы увидеть все фото. Нажмите, чтобы открыть галерею.</p>
             
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16" id="photoGallery">
@@ -626,7 +657,7 @@
     <!-- Отзывы (карусель) -->
     <section id="reviews" class="py-20 bg-green-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-4 editable scroll-reveal" data-id="reviews-title">Что говорят наши гости</h2>
+            <h2 class="text-3xl font-bold text-center mb-4 scroll-reveal">Что говорят наши гости</h2>
             <div class="text-center text-gray-600 mb-12 scroll-reveal">
                 Рейтинг <span class="font-bold text-green-700">5.0</span> на Авито (18 отзывов) и <span class="font-bold text-green-700">4.9</span> на Яндекс.Картах
             </div>
@@ -642,37 +673,37 @@
                 <div class="reviews-track" id="reviewsTrack">
                     <div class="review-card bg-white p-6 rounded-xl shadow-md">
                         <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="text-gray-700 mb-4 editable" data-id="rev-1">"Очень понравилось! Домик замечательный, расположен в тихом месте, оснащён всем необходимым. Удобные кровати и самое главное — тишина."</p>
+                        <p class="text-gray-700 mb-4">"Очень понравилось! Домик замечательный, расположен в тихом месте, оснащён всем необходимым. Удобные кровати и самое главное — тишина."</p>
                         <p class="font-bold text-sm text-gray-500">— Гость, февраль 2026</p>
                     </div>
                     <div class="review-card bg-white p-6 rounded-xl shadow-md">
                         <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="text-gray-700 mb-4 editable" data-id="rev-2">"Андрей и Надежда встретили очень душевно. Всё чисто, есть всё для комфортного проживания. До термальных источников рукой подать."</p>
+                        <p class="text-gray-700 mb-4">"Андрей и Надежда встретили очень душевно. Всё чисто, есть всё для комфортного проживания. До термальных источников рукой подать."</p>
                         <p class="font-bold text-sm text-gray-500">— Максим, январь 2026</p>
                     </div>
                     <div class="review-card bg-white p-6 rounded-xl shadow-md">
                         <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="text-gray-700 mb-4 editable" data-id="rev-3">"Отличное место для семейного отдыха. Чисто, уютно, есть терраса. Рядом лес, дышится легко. Обязательно вернёмся!"</p>
+                        <p class="text-gray-700 mb-4">"Отличное место для семейного отдыха. Чисто, уютно, есть терраса. Рядом лес, дышится легко. Обязательно вернёмся!"</p>
                         <p class="font-bold text-sm text-gray-500">— Елена, декабрь 2025</p>
                     </div>
                     <div class="review-card bg-white p-6 rounded-xl shadow-md">
                         <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="text-gray-700 mb-4 editable" data-id="rev-4">"Приезжали на новогодние праздники. Дом тёплый, уютный, всё работало. Мангал на улице — огромный плюс. Хозяева всегда на связи."</p>
+                        <p class="text-gray-700 mb-4">"Приезжали на новогодние праздники. Дом тёплый, уютный, всё работало. Мангал на улице — огромный плюс. Хозяева всегда на связи."</p>
                         <p class="font-bold text-sm text-gray-500">— Сергей и Ольга, январь 2026</p>
                     </div>
                     <div class="review-card bg-white p-6 rounded-xl shadow-md">
                         <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="text-gray-700 mb-4 editable" data-id="rev-5">"Отдыхали с собакой — приняли отлично, за небольшую доплату. Дом просторный, собака бегала по участку. До Псыгупс дошли пешком за 15 минут."</p>
+                        <p class="text-gray-700 mb-4">"Отдыхали с собакой — приняли отлично, за небольшую доплату. Дом просторный, собака бегала по участку. До Псыгупс дошли пешком за 15 минут."</p>
                         <p class="font-bold text-sm text-gray-500">— Анна, ноябрь 2025</p>
                     </div>
                     <div class="review-card bg-white p-6 rounded-xl shadow-md">
                         <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="text-gray-700 mb-4 editable" data-id="rev-6">"Всё соответствует фото и описанию. Чистое постельное белье, полотенца, средства гигиены — всё как в хорошем отеле. Wi-Fi работает отлично."</p>
+                        <p class="text-gray-700 mb-4">"Всё соответствует фото и описанию. Чистое постельное белье, полотенца, средства гигиены — всё как в хорошем отеле. Wi-Fi работает отлично."</p>
                         <p class="font-bold text-sm text-gray-500">— Дмитрий, октябрь 2025</p>
                     </div>
                     <div class="review-card bg-white p-6 rounded-xl shadow-md">
                         <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="text-gray-700 mb-4 editable" data-id="rev-7">"Второй раз приезжаем и точно вернёмся ещё. Тихое место, свежий воздух, рядом лес. Идеально, чтобы отдохнуть от городской суеты. Спасибо хозяевам!"</p>
+                        <p class="text-gray-700 mb-4">"Второй раз приезжаем и точно вернёмся ещё. Тихое место, свежий воздух, рядом лес. Идеально, чтобы отдохнуть от городской суеты. Спасибо хозяевам!"</p>
                         <p class="font-bold text-sm text-gray-500">— Ирина и Павел, сентябрь 2025</p>
                     </div>
                 </div>
@@ -682,10 +713,9 @@
 
     <!-- Маршрут с Яндекс.Картой -->
     <section id="route" class="py-20 container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12 editable scroll-reveal" data-id="route-title">Как добраться до «Псыгупс»</h2>
+        <h2 class="text-3xl font-bold text-center mb-12 scroll-reveal">Как добраться до «Псыгупс»</h2>
         <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center scroll-reveal">
             <div class="md:w-1/2 w-full">
-                <!-- Яндекс.Карта с адресом дома -->
                 <div class="map-container">
                     <iframe src="https://yandex.ru/map-widget/v1/?ll=40.179868%2C44.526138&z=17&l=map&pt=40.179868,44.526138,pm2rdm" 
                             allowfullscreen="true" 
@@ -697,7 +727,6 @@
                     пос. Тульский, ул. Ольховая, 18
                 </p>
                 
-                <!-- Кнопка "Открыть маршрут в Яндекс.Картах" -->
                 <div class="flex justify-center mt-4">
                     <a href="https://yandex.ru/maps/?rtext=44.526138%2C40.179868~44.531452%2C40.169563&rtt=pedestrian" 
                        target="_blank" 
@@ -716,21 +745,21 @@
                     <div class="bg-green-100 p-3 rounded-full mr-4"><i class="fas fa-walking text-green-600 text-xl"></i></div>
                     <div>
                         <h3 class="font-bold text-lg">Всего 1 км пешком (15 минут)</h3>
-                        <p class="text-gray-600 editable" data-id="route-1">Комфортная прогулка по тихому поселку с асфальтированной дорогой до самого входа в термальный комплекс.</p>
+                        <p class="text-gray-600">Комфортная прогулка по тихому поселку с асфальтированной дорогой до самого входа в термальный комплекс.</p>
                     </div>
                 </div>
                 <div class="flex items-start hover-lift p-4 rounded-lg">
                     <div class="bg-blue-100 p-3 rounded-full mr-4"><i class="fas fa-tree text-blue-600 text-xl"></i></div>
                     <div>
                         <h3 class="font-bold text-lg">Красивый лес рядом</h3>
-                        <p class="text-gray-600 editable" data-id="route-2">Маршрут проходит рядом с живописным лесным массивом, где можно дышать свежим воздухом.</p>
+                        <p class="text-gray-600">Маршрут проходит рядом с живописным лесным массивом, где можно дышать свежим воздухом.</p>
                     </div>
                 </div>
                 <div class="flex items-start hover-lift p-4 rounded-lg">
                     <div class="bg-yellow-100 p-3 rounded-full mr-4"><i class="fas fa-store text-yellow-600 text-xl"></i></div>
                     <div>
                         <h3 class="font-bold text-lg">Инфраструктура по пути</h3>
-                        <p class="text-gray-600 editable" data-id="route-3">Не нужно везти всё с собой: по дороге расположены продуктовые магазины и аптека.</p>
+                        <p class="text-gray-600">Не нужно везти всё с собой: по дороге расположены продуктовые магазины и аптека.</p>
                     </div>
                 </div>
             </div>
@@ -740,27 +769,27 @@
     <!-- Бронирование -->
     <section id="booking" class="py-20 bg-gradient-to-br from-green-700 to-green-900 text-white">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl font-bold text-center mb-8 editable scroll-reveal" data-id="book-title">Моментальное бронирование</h2>
-            <div class="bg-white text-gray-800 rounded-2xl shadow-2xl p-6 md:p-8 scroll-reveal">
-                <form id="bookingForm" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="w-full">
+            <h2 class="text-3xl font-bold text-center mb-8 scroll-reveal">Моментальное бронирование</h2>
+            <div class="bg-white text-gray-800 rounded-2xl shadow-2xl p-4 md:p-8 scroll-reveal">
+                <form id="bookingForm" class="space-y-4 md:space-y-6">
+                    <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                        <div class="w-full min-w-0">
                             <label class="block text-sm font-bold mb-2">Дата заезда</label>
-                            <input type="date" id="checkin" class="w-full border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition" required>
+                            <input type="date" id="checkin" class="w-full border-2 rounded-lg px-3 md:px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition" required>
                         </div>
-                        <div class="w-full">
+                        <div class="w-full min-w-0">
                             <label class="block text-sm font-bold mb-2">Дата выезда</label>
-                            <input type="date" id="checkout" class="w-full border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition" required>
+                            <input type="date" id="checkout" class="w-full border-2 rounded-lg px-3 md:px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition" required>
                         </div>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="w-full">
+                    <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                        <div class="w-full min-w-0">
                             <label class="block text-sm font-bold mb-2">Количество гостей (до 6)</label>
-                            <input type="number" id="guests" min="1" max="6" value="2" class="w-full border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition" required>
+                            <input type="number" id="guests" min="1" max="6" value="2" class="w-full border-2 rounded-lg px-3 md:px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition" required>
                         </div>
-                        <div class="w-full">
+                        <div class="w-full min-w-0">
                             <label class="block text-sm font-bold mb-2">Домашние животные?</label>
-                            <select id="pets" class="w-full border-2 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
+                            <select id="pets" class="w-full border-2 rounded-lg px-3 md:px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition">
                                 <option value="0">Нет</option>
                                 <option value="500">Да (+500 ₽)</option>
                             </select>
@@ -771,40 +800,38 @@
                         🎄 Новогодние праздники! Специальный тариф: 10000 ₽/сутки
                     </div>
 
-                    <div class="bg-gray-100 p-6 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="bg-gray-100 p-4 md:p-6 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4">
                         <div>
                             <p class="text-sm text-gray-600">Стоимость за сутки:</p>
-                            <p class="text-3xl font-bold text-green-700"><span id="pricePerNight" class="editable" data-id="price">5000</span> ₽</p>
+                            <p class="text-2xl md:text-3xl font-bold text-green-700"><span id="pricePerNight">5000</span> ₽</p>
                         </div>
                         <div class="text-right">
                             <p class="text-sm text-gray-600">Итого за <span id="nightsCount">0</span> ночей:</p>
-                            <p class="text-4xl font-bold text-gray-900"><span id="totalPrice">0</span> ₽</p>
+                            <p class="text-3xl md:text-4xl font-bold text-gray-900"><span id="totalPrice">0</span> ₽</p>
                         </div>
                     </div>
 
-                    <!-- Кнопки мессенджеров -->
                     <div class="grid md:grid-cols-2 gap-4">
-                        <button type="button" onclick="sendToWhatsApp()" class="btn-primary w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-lg text-lg transition flex items-center justify-center gap-2 shadow-lg">
-                            <i class="fab fa-whatsapp text-2xl"></i> Отправить заявку в WhatsApp
+                        <button type="button" onclick="sendToWhatsApp()" class="btn-primary w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 md:py-4 rounded-lg text-base md:text-lg transition flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fab fa-whatsapp text-xl md:text-2xl"></i> <span class="hidden sm:inline">Отправить заявку в </span>WhatsApp
                         </button>
 
-                        <button type="button" onclick="sendToMax()" class="max-btn w-full text-white font-bold py-4 rounded-lg text-lg transition flex items-center justify-center gap-2 shadow-lg">
-                            <i class="fas fa-comment text-2xl"></i> Отправить заявку в Max
+                        <button type="button" onclick="sendToMax()" class="max-btn w-full text-white font-bold py-3 md:py-4 rounded-lg text-base md:text-lg transition flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fas fa-comment text-xl md:text-2xl"></i> <span class="hidden sm:inline">Отправить заявку в </span>Max
                         </button>
                     </div>
 
-                    <!-- Кнопки платформ бронирования -->
                     <div class="grid md:grid-cols-2 gap-4">
                         <a href="https://www.avito.ru/tulskiy/doma_dachi_kottedzhi/2-k._dom_60_m_2283776657" 
                            target="_blank" 
-                           class="avito-btn w-full text-white font-bold py-4 rounded-lg text-lg transition flex items-center justify-center gap-2 shadow-lg">
-                            <i class="fas fa-shopping-bag text-2xl"></i> Забронировать через Авито
+                           class="avito-btn w-full text-white font-bold py-3 md:py-4 rounded-lg text-base md:text-lg transition flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fas fa-shopping-bag text-xl md:text-2xl"></i> <span class="hidden sm:inline">Забронировать через </span>Авито
                         </a>
                         
                         <a href="https://yandex.ru/maps/org/gostevoy_dom_na_olkhovoy/165255008317/?ll=40.179837%2C44.526167&z=16" 
                            target="_blank" 
-                           class="yandex-maps-btn w-full text-white font-bold py-4 rounded-lg text-lg transition flex items-center justify-center gap-2 shadow-lg">
-                            <i class="fas fa-map-marked-alt text-2xl"></i> Забронировать через Яндекс.Карты
+                           class="yandex-maps-btn w-full text-white font-bold py-3 md:py-4 rounded-lg text-base md:text-lg transition flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fas fa-map-marked-alt text-xl md:text-2xl"></i> <span class="hidden sm:inline">Забронировать через </span>Яндекс.Карты
                         </a>
                     </div>
 
@@ -817,8 +844,8 @@
     <!-- Футер -->
     <footer class="bg-gray-900 text-gray-400 py-12">
         <div class="container mx-auto px-6 text-center">
-            <p class="mb-4 editable" data-id="footer-address">📍 Республика Адыгея, Майкопский р-н, пос. Тульский, ул. Ольховая, 18</p>
-            <p class="mb-4 editable" data-id="footer-phone">📞 +7 (952) 979-54-06 (Андрей и Надежда)</p>
+            <p class="mb-4">📍 Республика Адыгея, Майкопский р-н, пос. Тульский, ул. Ольховая, 18</p>
+            <p class="mb-4">📞 +7 (952) 979-54-06 (Андрей и Надежда)</p>
             <div class="mb-4 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="https://www.avito.ru/tulskiy/doma_dachi_kottedzhi/2-k._dom_60_m_2283776657" 
                    target="_blank" 
@@ -846,11 +873,6 @@
             <div class="modal-counter" id="modalCounter"></div>
         </div>
     </div>
-
-    <!-- Кнопка администратора -->
-    <button onclick="toggleEditMode()" class="fixed bottom-4 right-4 bg-gray-800 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 z-50 transition hover:scale-110" title="Режим редактирования">
-        <i class="fas fa-cog"></i>
-    </button>
 
     <script>
         // СЛАЙД-ШОУ ДЛЯ ГЛАВНОГО ЭКРАНА
@@ -911,7 +933,7 @@
             slideInterval = setInterval(nextSlide, 5000);
         }
 
-        // ДАННЫЕ ГАЛЕРЕИ - ЗАМЕНИТЕ ССЫЛКИ НА ВАШИ ФОТО
+        // ДАННЫЕ ГАЛЕРЕИ
         const galleryData = {
             "Комнаты": [
                 "https://i.ibb.co/QvBmTPTZ/1.webp",
@@ -1035,35 +1057,13 @@
             track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         }
 
-        // 1. ЛОГИКА "АДМИН-ПАНЕЛИ"
-        let isEditing = false;
-        function toggleEditMode() {
-            isEditing = !isEditing;
-            document.body.classList.toggle('editing');
-            const elements = document.querySelectorAll('.editable');
-            elements.forEach(el => {
-                el.contentEditable = isEditing;
-            });
-            if (!isEditing) {
-                elements.forEach(el => {
-                    localStorage.setItem('site_content_' + el.dataset.id, el.innerHTML);
-                });
-                alert('Изменения сохранены!');
-            }
-        }
-
         window.addEventListener('load', () => {
-            const elements = document.querySelectorAll('.editable');
-            elements.forEach(el => {
-                const saved = localStorage.getItem('site_content_' + el.dataset.id);
-                if (saved) el.innerHTML = saved;
-            });
             calculatePrice();
             generateGallery();
             initHeroSlideshow();
         });
 
-        // 2. КАЛЬКУЛЯТОР БРОНИРОВАНИЯ
+        // КАЛЬКУЛЯТОР БРОНИРОВАНИЯ
         const checkin = document.getElementById('checkin');
         const checkout = document.getElementById('checkout');
         
@@ -1072,15 +1072,14 @@
         checkout.min = today;
 
         const BASE_PRICE = 5000;
-        const SEASONAL_PRICE = 10000; // Новогодняя цена
+        const SEASONAL_PRICE = 10000;
 
         function isSeasonalPeriod(date) {
             const month = date.getMonth();
             const day = date.getDate();
             
-            // Новогодний период: 30 декабря - 9 января
-            if (month === 11 && day >= 30) return true; // Декабрь с 30-го
-            if (month === 0 && day <= 9) return true; // Январь до 9-го
+            if (month === 11 && day >= 30) return true;
+            if (month === 0 && day <= 9) return true;
             return false;
         }
 
@@ -1134,9 +1133,8 @@
         checkin.addEventListener('change', calculatePrice);
         checkout.addEventListener('change', calculatePrice);
         document.getElementById('pets').addEventListener('change', calculatePrice);
-        document.getElementById('pricePerNight').addEventListener('input', calculatePrice);
 
-        // 3. ОТПРАВКА В WHATSAPP
+        // ОТПРАВКА В WHATSAPP
         function sendToWhatsApp() {
             const inDate = checkin.value;
             const outDate = checkout.value;
@@ -1154,7 +1152,7 @@
             window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
         }
 
-        // 4. ОТПРАВКА В MAX
+        // ОТПРАВКА В MAX (ТОЛЬКО МОБИЛЬНОЕ ПРИЛОЖЕНИЕ)
         function sendToMax() {
             const inDate = checkin.value;
             const outDate = checkout.value;
@@ -1170,14 +1168,10 @@
             const message = `Здравствуйте! Хочу забронировать гостевой дом на Ольховой.%0A📅 Заезд: ${inDate}%0A📅 Выезд: ${outDate}%0A👥 Гостей: ${guests}%0A💰 Итого: ${total} ₽.%0AПодтвердите, пожалуйста, наличие мест.`;
             
             const encodedMessage = encodeURIComponent(message);
-            window.open(`https://max.com/chat/${phone}?text=${encodedMessage}`, '_blank');
-            
-            setTimeout(() => {
-                window.location.href = `max://chat/${phone}?text=${encodedMessage}`;
-            }, 500);
+            window.location.href = `max://chat/${phone}?text=${encodedMessage}`;
         }
 
-        // 5. АНИМАЦИИ ПРИ СКРОЛЛЕ
+        // АНИМАЦИИ ПРИ СКРОЛЛЕ
         function initScrollReveal() {
             const reveals = document.querySelectorAll('.scroll-reveal');
             
@@ -1196,7 +1190,7 @@
             revealOnScroll();
         }
 
-        // 6. ЭФФЕКТ НАВБАРА ПРИ СКРОЛЛЕ
+        // ЭФФЕКТ НАВБАРА ПРИ СКРОЛЛЕ
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 100) {
@@ -1208,7 +1202,7 @@
             }
         });
 
-        // 7. ПЛАВНАЯ ПРОКРУТКА
+        // ПЛАВНАЯ ПРОКРУТКА
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
